@@ -1,5 +1,5 @@
 const express = require("express");
-const { client, Client } = require("@notionhq/client");
+const { Client } = require("@notionhq/client");
 const cors = require("cors");
 
 const PORT = process.env.PORT || 4000;
@@ -20,7 +20,7 @@ app.post("/submitFormToNotion", async (req, res) => {
 
   try {
     const response = await notionClient.pages.create({
-      parent: { database_id: process.env.NOTION_DATABASE },
+      parent: { database_id: process.env.NOTION_DATABASE_ID },
       properties: {
         // Name = entire page
         Name: {

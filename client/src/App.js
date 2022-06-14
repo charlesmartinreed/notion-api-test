@@ -6,7 +6,36 @@ function App() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [notes, setNotes] = useState("");
 
-  function submitFormToNotion() {}
+  function clearFields() {
+    setName("");
+    setPhoneNumber("");
+    setNotes("");
+  }
+
+  function submitFormToNotion() {
+    let URL = `http://localhost:4000/`;
+    let endpoint = `submitFormToNotion`;
+    if (name === "" || phoneNumber === "" || notes === "") {
+      console.log("empty fields");
+      return;
+    }
+
+    // calling our local endpoint
+    fetch(URL + endpoint, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        phoneNumber,
+        notes,
+      }),
+    });
+
+    clearFields();
+  }
 
   return (
     <div className="App">
